@@ -42,7 +42,8 @@
 | Check | Result | Evidence |
 |---|---|---|
 | Theme engine class | ✅ | `app/Core/UI/Theme.php` — `getStyleUrl()`, `getCustomStyleUrl()` |
-| Custom CSS file path | ✅ | `public/theme/<active>/css/custom.css` — loaded AFTER theme stylesheet |
+| Custom CSS file path | ✅ | `public/theme/<active>/css/custom.css` (or `custom.min.css`, which is checked **first**) — loaded AFTER theme stylesheet |
+| Custom CSS resolution | ✅ | `getAssetPath('custom','css')` prefers `custom.min.css`, falls back to `custom.css`, and returns `false` when **neither exists** — the header template then omits the `<link>` entirely (no empty-href bug). Confirmed on the live box: no custom CSS file present today |
 | Theme selection UI | ✅ | User settings → Theme tab → iterates `availableThemes` from `themeCore->getAll()` |
 | Built-in themes | ✅ | `public/theme/default/` and `public/theme/minimal/` (each has `css/custom.css`) |
 | `LEAN_DEFAULT_THEME` env | ✅ | `config/sample.env:56` — default theme selection |
@@ -67,7 +68,25 @@
 - No customCSS/branding/customization mechanism in JS
 - No Persian digit substitution logic in JS
 
-### 2.4 Font Licensing
+### 2.5 Why the DB says fa-IR but the login page renders LTR (root cause, verified)
+
+The DB has `companysettings.language = fa-IR` **and** `usersettings.1.language = fa-IR`, yet the live login page emits `<html dir="ltr" lang="en">`. This is not a bug — it is the documented resolution order in `app/Core/Language.php:145-174` (`getCurrentLanguage()`):
+
+```
+1. session('usersettings.language')   ← only set for a LOGGED-IN user
+2. $_COOKIE['language']               ← only set after a user picks a language
+3. session('companysettings.language') ← only set once the company-settings session is loaded
+4. Accept-Language header              ← browser default
+5. env('LEAN_LANGUAGE', 'en-US')      ← FINAL FALLBACK
+```
+
+**Consequence:** every *unauthenticated* route (`/auth/login`, `/auth/resetPw`, `/auth/register`) falls straight through to step 5, which is `en-US` today. Authenticated routes already render `fa-IR` — so Persian RTL already works *inside* the app; only the pre-login screens are English.
+
+**Fix (owner decision D1):** set `LEAN_LANGUAGE=fa-IR`. That changes only the fallback, so step 5 agrees with the DB rows and the login page renders Persian/RTL too. No code change needed.
+
+Verified against tag `v3.10.0` of `Leantime/leantime` — `app/Core/Language.php:145-174`, `app/Core/Configuration/laravelConfig.php:61`, and `app/Language/languagelist.ini` (which lists `fa-IR = "فارسی"`).
+
+---
 
 | Font | License | CDN | Self-host | Persian glyphs |
 |---|---|---|---|---|
@@ -156,6 +175,9 @@ Repository: **https://github.com/h4z4rd95/leantime-persian-rtl**
 | E13 | Git push verified: HEAD == origin/main | `git rev-parse HEAD` = `6eab52d...` |
 | E14 | Inline runtime `<style id="fontStyleSetter">` sets `--primary-font-family:'roboto'`; `colorSchemeSetter` sets `--accent1:#004666`, `--accent2:#00a887` | login page HTML (`/auth/login`), confirmed by live-asset recon |
 | E15 | `app/custom/Language/<locale>.ini` overlay mechanism for translation overrides without vendor patching | `app/Core/UI/Language.php` (custom-language path resolution); upstream-source research |
+| E16 | Language resolution order: session → cookie → companysettings session → Accept-Language → `LEAN_LANGUAGE` env. Unauthenticated routes fall to the env fallback, which is why the login page is LTR despite the DB rows | `app/Core/Language.php:145-174` (tag v3.10.0), verified against live login page |
+| E17 | Custom CSS resolution prefers `custom.min.css` over `custom.css`; returns `false` if neither exists, and the header template then omits the `<link>` | `app/Core/UI/Theme.php:799-814` + `app/Views/Templates/sections/header.blade.php:92-96` |
+| E18 | Compose/env locations on host: `/etc/dokploy/compose/leantime-xyopsc/code/docker-compose.yml` and `.env`; active theme `default` from `usersettings.1.theme` | `docker inspect` labels + `zp_settings` rows |
 
 ---
 

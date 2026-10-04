@@ -92,7 +92,9 @@ Expected: `HTTP/2 200` and `Content-Type: application/font-woff2`
 
 ### Step 4: Upload RTL CSS (upgrade-safe via Theme custom.css)
 
-Leantime's `Theme::getCustomStyleUrl()` loads `public/theme/<active>/css/custom.css` **after** the theme stylesheet. The default theme is `default`.
+Leantime's `Theme::getCustomStyleUrl()` loads `public/theme/<active>/css/custom.min.css` (preferred) or `public/theme/<active>/css/custom.css` **after** the theme stylesheet. The default theme is `default`. If neither file exists the `<link>` is omitted entirely, so there is no empty-href risk while the file is absent.
+
+**Note:** `getAssetPath()` checks `custom.min.css` FIRST — use that filename so it wins deterministically.
 
 ```bash
 # Create the custom.css path in the default theme
@@ -106,12 +108,12 @@ scp css/shared-rtl-foundation.css root@65.109.204.200:/tmp/custom-rtl.css
 # Modify font paths for the container environment
 plink -ssh -batch -pw 'kwCqijsJeqmxvncrs9xw%' root@65.109.204.200 \
   "sed 's|url(\"fonts/|url(\"/userfiles/rtl-fonts/|g' /tmp/custom-rtl.css > /tmp/custom-rtl-final.css && \
-   docker cp /tmp/custom-rtl-final.css leantime-xyopsc-leantime-1:/var/www/html/public/theme/default/css/custom.css && \
-   docker exec leantime-xyopsc-leantime-1 chown www-data:www-data /var/www/html/public/theme/default/css/custom.css"
+   docker cp /tmp/custom-rtl-final.css leantime-xyopsc-leantime-1:/var/www/html/public/theme/default/css/custom.min.css && \
+   docker exec leantime-xyopsc-leantime-1 chown www-data:www-data /var/www/html/public/theme/default/css/custom.min.css"
 
 # Verify
 plink -ssh -batch -pw 'kwCqijsJeqmxvncrs9xw%' root@65.109.204.200 \
-  "docker exec leantime-xyopsc-leantime-1 wc -l /var/www/html/public/theme/default/css/custom.css"
+  "docker exec leantime-xyopsc-leantime-1 wc -l /var/www/html/public/theme/default/css/custom.min.css"
 ```
 
 ### Step 5: Set Persian as default language
@@ -160,9 +162,9 @@ curl -sL "https://leantime.ppsj.ir/dashboard/home" | grep -o '<html[^>]*>'
 If anything breaks, revert immediately:
 
 ```bash
-# 1. Remove custom.css (Leantime reverts to stock styling)
+# 1. Remove custom.min.css (Leantime reverts to stock styling)
 plink -ssh -batch -pw 'kwCqijsJeqmxvncrs9xw%' root@65.109.204.200 \
-  "docker exec leantime-xyopsc-leantime-1 rm /var/www/html/public/theme/default/css/custom.css"
+  "docker exec leantime-xyopsc-leantime-1 rm /var/www/html/public/theme/default/css/custom.min.css"
 
 # 2. Revert language to English
 plink -ssh -batch -pw 'kwCqijsJeqmxvncrs9xw%' root@65.109.204.200 \
