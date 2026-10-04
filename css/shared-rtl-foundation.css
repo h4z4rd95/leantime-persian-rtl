@@ -1,0 +1,327 @@
+/* =========================================================================
+   Leantime Persian RTL — Shared Foundation CSS (v1.0.0)
+   Target: Leantime v3.10.0
+   Deployment: public/theme/default/css/custom.css  OR  deploy/persistent/custom.css
+   License: OFL-1.1 (Vazirmatn font) + MIT (CSS)
+   =========================================================================
+   UPGRADE-SAFETY
+   - This file is injected AFTER Leantime's compiled CSS (via Theme::getCustomStyleUrl()
+     which loads public/theme/<active>/css/custom.css after the theme stylesheet).
+   - Rules use [dir="rtl"] scoping so they are completely inert in LTR mode.
+   - Specificity uses [dir="rtl"] + element selector (1+1+0) which exceeds
+     Leantime's bare .class (0+1+0) selectors, ensuring overrides apply.
+   - Physical margin-left/right/padding-left/right are flipped only where the
+     Tailwind utilities and Leantime's own rules don't cover it.
+   - No @keyframe modifications, no font-weight changes, no size changes.
+   ========================================================================= */
+
+/* ── Vazirmatn Font Faces ──────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/Vazirmatn-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/Vazirmatn-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/Vazirmatn-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/Vazirmatn-Bold.woff2') format('woff2');
+}
+
+/* ── 1. Global Font & Direction ─────────────────────────────────────────── */
+
+html[dir="rtl"] {
+  font-family: 'Vazirmatn', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif !important;
+}
+
+/* Preserve LTR for technical identifiers inside RTL text */
+html[dir="rtl"] .ltr,
+html[dir="rtl"] [dir="ltr"],
+html[dir="rtl"] code,
+html[dir="rtl"] pre,
+html[dir="rtl"] .code,
+html[dir="rtl"] .monospace {
+  font-family: 'Roboto Mono', 'Consolas', 'Courier New', monospace !important;
+  direction: ltr !important;
+  unicode-bidi: embed;
+  text-align: left !important;
+}
+
+/* ── 2. Physical Margin Flips ───────────────────────────────────────────── */
+
+/* Leantime row gutter: margin-left:-30px (min-width:1200px) flips to right */
+html[dir="rtl"] .row,
+html[dir="rtl"] .row-fluid,
+html[dir="rtl"] .thumbnails {
+  margin-left: 0 !important;
+  margin-right: -20px !important; /* default grid gutter */
+}
+
+@media (min-width: 1200px) {
+  html[dir="rtl"] .row { margin-right: -30px !important; }
+  html[dir="rtl"] .thumbnails { margin-right: -30px !important; }
+}
+
+/* Tailwind utility margin-left→right */
+html[dir="rtl"] .tw-ml-\[10px\],
+html[dir="rtl"] .tw-ml-m,
+html[dir="rtl"] .tw-ml-sm,
+html[dir="rtl"] .tw-ml-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+html[dir="rtl"] .tw-ml-\[10px\] { margin-right: 10px !important; }
+html[dir="rtl"] .tw-ml-m    { margin-right: 15px !important; }
+html[dir="rtl"] .tw-ml-sm   { margin-right: 10px !important; }
+
+/* Tailwind utility margin-right→left */
+html[dir="rtl"] .tw-mr-\[5px\],
+html[dir="rtl"] .tw-mr-\[10px\],
+html[dir="rtl"] .tw-mr-3,
+html[dir="rtl"] .tw-mr-xs,
+html[dir="rtl"] .tw-mr-sm,
+html[dir="rtl"] .tw-mr-m {
+  margin-right: 0 !important;
+}
+html[dir="rtl"] .tw-mr-\[5px\]  { margin-left: 5px !important; }
+html[dir="rtl"] .tw-mr-\[10px\] { margin-left: 10px !important; }
+html[dir="rtl"] .tw-mr-3       { margin-left: .75rem !important; }
+html[dir="rtl"] .tw-mr-xs      { margin-left: 5px !important; }
+html[dir="rtl"] .tw-mr-sm      { margin-left: 10px !important; }
+html[dir="rtl"] .tw-mr-m       { margin-left: 15px !important; }
+
+/* mx-m: both margins (padding-style, symmetric—keep as is since both sides) */
+html[dir="rtl"] .tw-mx-m {
+  /* symmetric: margin-left:15px; margin-right:15px — no flip needed */
+}
+
+/* ── 3. Physical Padding Flips (single-side only) ──────────────────────── */
+
+html[dir="rtl"] .tw-pl-1  { padding-left: 0 !important;  padding-right: .25rem !important; }
+html[dir="rtl"] .tw-pl-2  { padding-left: 0 !important;  padding-right: .5rem !important;  }
+html[dir="rtl"] .tw-pl-3  { padding-left: 0 !important;  padding-right: .75rem !important; }
+html[dir="rtl"] .tw-pl-5  { padding-left: 0 !important;  padding-right: 1.25rem !important;}
+html[dir="rtl"] .tw-pr-xs { padding-right: 0 !important; padding-left: 5px !important;     }
+
+/* symmetric px classes — keep both sides */
+
+/* ── 4. Float Flips ────────────────────────────────────────────────────── */
+
+html[dir="rtl"] .tw-float-right { float: left !important; }
+html[dir="rtl"] .tw-float-left  { float: right !important; }
+html[dir="rtl"] .pull-right     { float: left !important; }
+html[dir="rtl"] .pull-left      { float: right !important; }
+html[dir="rtl"] .float-right    { float: left !important; }
+html[dir="rtl"] .float-left     { float: right !important; }
+
+/* ── 5. Absolute/Relative Positioning ──────────────────────────────────── */
+
+html[dir="rtl"] .tw-right-\[10px\] {
+  right: auto !important;
+  left: 10px !important;
+}
+
+html[dir="rtl"] .logo {
+  float: right !important;
+  margin-left: 0 !important;
+  margin-right: 55px !important;
+}
+
+/* ── 6. Text Align ──────────────────────────────────────────────────────── */
+
+html[dir="rtl"] .tw-text-left  { text-align: right !important; }
+html[dir="rtl"] .tw-text-right { text-align: left !important; }
+
+/* ── 7. Login Page Specific Overrides ───────────────────────────────────── */
+
+html[dir="rtl"] .regpanel {
+  direction: rtl;
+}
+
+html[dir="rtl"] .regpanel .pageheader {
+  text-align: right;
+}
+
+html[dir="rtl"] .regpanel .regcontent {
+  direction: rtl;
+}
+
+/* ── 8. Kanban/Board Column Flips ───────────────────────────────────────── */
+
+html[dir="rtl"] .kanban {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Kanban columns typically flow row-reverse in RTL: */
+html[dir="rtl"] .kanban-board,
+html[dir="rtl"] .kanban-board-inner,
+html[dir="rtl"] .kanban-board-scroll {
+  flex-direction: row-reverse !important;
+}
+
+/* ── 9. Table & Data Flips ──────────────────────────────────────────────── */
+
+html[dir="rtl"] .dataTables_wrapper .dataTables_length,
+html[dir="rtl"] .dataTables_wrapper .dataTables_filter,
+html[dir="rtl"] .dataTables_wrapper .dataTables_info,
+html[dir="rtl"] .dataTables_wrapper .dataTables_paginate,
+html[dir="rtl"] .dataTables_wrapper .dataTables_processing,
+html[dir="rtl"] .dataTables_wrapper .dataTables_paginate .pagination {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ── 10. Pagination Arrows ──────────────────────────────────────────────── */
+
+html[dir="rtl"] .pagination .fa-chevron-left,
+html[dir="rtl"] .pagination .fa-angle-left {
+  transform: scaleX(-1) !important;
+}
+html[dir="rtl"] .pagination .fa-chevron-right,
+html[dir="rtl"] .pagination .fa-angle-right {
+  transform: scaleX(-1) !important;
+}
+
+/* ── 11. Dropdown / Menu Positioning ────────────────────────────────────── */
+
+html[dir="rtl"] .dropdown-menu {
+  right: auto !important;
+  left: 0 !important;
+  text-align: right !important;
+}
+
+html[dir="rtl"] .dropdown-menu-right {
+  right: auto !important;
+  left: 0 !important;
+}
+
+/* ── 12. Modal / Dialog Direction ───────────────────────────────────────── */
+
+html[dir="rtl"] .modal-dialog {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] .modal-header .close {
+  right: auto !important;
+  left: 15px !important;
+}
+
+/* ── 13. Sidebar Positioning ────────────────────────────────────────────── */
+
+html[dir="rtl"] .sidebar {
+  right: 0 !important;
+  left: auto !important;
+}
+
+html[dir="rtl"] .rightpanel {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* ── 14. Form Elements in RTL ───────────────────────────────────────────── */
+
+html[dir="rtl"] .form-control {
+  text-align: right !important;
+}
+
+html[dir="rtl"] .input-prepend .add-on:first-child,
+html[dir="rtl"] .input-append .add-on:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+html[dir="rtl"] .input-prepend .add-on:last-child,
+html[dir="rtl"] .input-append .add-on:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+html[dir="rtl"] .input-prepend { direction: rtl; }
+html[dir="rtl"] .input-append  { direction: rtl; }
+
+/* ── 15. Select2 / Dropdown Components ──────────────────────────────────── */
+
+html[dir="rtl"] .select2-container { direction: rtl; text-align: right; }
+html[dir="rtl"] .select2-container-multi .select2-choices { direction: rtl; text-align: right; }
+
+/* ── 16. Tooltip & Popover Positioning ──────────────────────────────────── */
+
+html[dir="rtl"] .tooltip.left .tooltip-arrow { left: auto !important; right: 0 !important; }
+html[dir="rtl"] .tooltip.right .tooltip-arrow { right: auto !important; left: 0 !important; }
+html[dir="rtl"] .tooltip.right .tooltip-arrow { left: auto !important; right: -10px !important; }
+html[dir="rtl"] .tooltip.bottom-left .tooltip-arrow { left: auto !important; right: 0 !important; }
+html[dir="rtl"] .tooltip.bottom-right .tooltip-arrow { right: auto !important; left: 0 !important; }
+
+/* ── 17. Chosen / Select Components ─────────────────────────────────────── */
+
+html[dir="rtl"] .chosen-choices { direction: rtl; text-align: right; }
+html[dir="rtl"] .chosen-single { direction: rtl; text-align: right; }
+
+/* ── 18. Gantt / Timeline Visual Direction ──────────────────────────────── */
+
+html[dir="rtl"] .gantt .gantt-container,
+html[dir="rtl"] .timeline .timeline-container {
+  direction: rtl;
+}
+
+/* ── 19. Progress Bars & Rings ──────────────────────────────────────────── */
+
+html[dir="rtl"] .progress-bar {
+  /* Progress bars fill left-to-right in LTR; RTL fills right-to-left */
+  float: right !important;
+}
+
+/* ── 20. Button Group Order ─────────────────────────────────────────────── */
+
+html[dir="rtl"] .btn-group > .btn:first-child,
+html[dir="rtl"] .btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0 3px 3px 0;
+}
+html[dir="rtl"] .btn-group > .btn:last-child,
+html[dir="rtl"] .btn-group > .dropdown-toggle {
+  border-radius: 3px 0 0 3px;
+}
+
+/* ── 21. Notification Dropdown ──────────────────────────────────────────── */
+
+html[dir="rtl"] .notificationDropdown .dropdown-menu {
+  left: -15px !important;
+  right: auto !important;
+  text-align: right !important;
+}
+
+/* ── 22. Mobile Menu ────────────────────────────────────────────────────── */
+
+html[dir="rtl"] .menu-closed .rightpanel {
+  right: 0 !important;
+  left: -300px !important;
+  transition: right 0.3s ease;
+}
+
+html[dir="rtl"] .menu-open .rightpanel {
+  right: 300px !important;
+  left: 0 !important;
+  transition: right 0.3s ease;
+}
+
+/* =========================================================================
+   END OF SHARED RTL FOUNDATION
+   ========================================================================= */

@@ -1,0 +1,211 @@
+/* =========================================================================
+   Leantime Persian RTL — Login Screen Prototype
+   Simulates https://leantime.ppsj.ir/auth/login with Persian/RTL
+   ========================================================================= */
+
+:root {
+  --primary: #004666;
+  --accent1: #004666;
+  --accent2: #219653;
+  --accent1-color: #fff;
+  --primary-font-color: #333;
+  --header-gradient: linear-gradient(135deg, var(--accent1) 20%, var(--accent2) 90%);
+  --large-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  --box-radius: 16px;
+  --secondary-background: #fff;
+  --primary-background: rgba(255,255,255,0.8);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Vazirmatn', 'Roboto', 'Helvetica Neue', sans-serif;
+  direction: rtl;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.header {
+  background: var(--header-gradient);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header img { height: 40px; }
+
+.page-container {
+  display: flex;
+  min-height: calc(100vh - 60px);
+  max-width: 100vw;
+  position: relative;
+}
+
+/* Left panel (RTL → right visually) */
+.regLeft {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--accent1) 20%, var(--accent2) 90%);
+  color: #fff;
+  position: relative;
+  padding: 25px;
+  overflow: hidden;
+}
+
+.regLeft .logo img {
+  height: 50px;
+  filter: brightness(0) invert(1);
+}
+
+.regLeft .welcomeContent {
+  margin-top: 30px;
+}
+
+.regLeft .welcomeContent h1 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.regLeft .socialProofContent {
+  margin-top: 40px;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Right panel (RTL → left visually) */
+.regRight {
+  flex: 1 1 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.regpanel {
+  background: var(--secondary-background);
+  border-radius: var(--box-radius);
+  box-shadow: var(--large-shadow);
+  width: 90%;
+  max-width: 500px;
+  padding: 30px;
+  margin: 35% auto 0;
+}
+
+.regpanelinner {
+  direction: rtl;
+  text-align: right;
+}
+
+.regpanel .pageheader {
+  border-bottom: 0;
+  padding: 0 0 15px;
+}
+
+.regpanel .pagetitle h1 {
+  font-size: 24px;
+  color: var(--accent1);
+  margin-bottom: 0;
+}
+
+.regpanel .regcontent {
+  padding-top: 15px;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: var(--primary-font-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 14px;
+  direction: rtl;
+  text-align: right;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent1);
+  box-shadow: 0 0 0 3px rgba(0,70,102,0.1);
+}
+
+.forgotPw {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--accent1);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.forgotPw:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--accent1);
+  color: #fff;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: #003551;
+  transform: translateY(-1px);
+}
+
+.form-submit {
+  text-align: right;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .regLeft {
+    display: none;
+  }
+  
+  .regRight {
+    flex: 1 1 100%;
+  }
+  
+  .regpanel {
+    margin: 20px;
+    width: calc(100% - 40px);
+  }
+}
+
+/* Persian digit support */
+.persian-num {
+  font-feature-settings: "ss02";
+}

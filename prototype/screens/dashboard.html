@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>پروزه‌های PPSJ — پیشخوان</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <style>
+    body { background: #f5f6fa; }
+    .hidden { display: none; }
+    .show-modal .modal-overlay { display: flex; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <div class="app-header">
+    <div class="brand">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23fff' opacity='0.3'/%3E%3Ctext x='12' y='16' text-anchor='middle' fill='%23fff' font-size='11'%3E123%3C/text%3E%3C/svg%3E" alt="" />
+      <span>پروزه‌های PPSJ</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#">پیشخوان</a>
+      <a href="#" class="active">پروزه‌ها</a>
+      <a href="#">زمان‌ها</a>
+      <a href="#">تقویم</a>
+    </nav>
+    <div class="user-menu">
+      <span>هکرز</span>
+      <div class="avatar">ه</div>
+    </div>
+  </div>
+
+  <!-- Project Header -->
+  <div class="project-header">
+    <div>
+      <div class="project-title">ربات معامله‌گر (TradersBot)</div>
+      <div class="project-stats">
+        <div class="stat-item"><span class="stat-icon stat-blue">◆</span> ۱۲ کار</div>
+        <div class="stat-item"><span class="stat-icon stat-green">◆</span> ۳ تکمیل</div>
+        <div class="stat-item"><span class="stat-icon stat-orange">◆</span> ۱ بلوکه</div>
+        <div class="stat-item"><span class="stat-icon">📊</span> ۱ پیش‌نیاز</div>
+      </div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn btn-primary" style="width:auto; padding:8px 16px; font-size:13px;" onclick="document.body.classList.add('show-modal')">+ کار جدید</button>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-bar">
+    <a href="#" class="active">پیش‌نمایش</a>
+    <a href="#">تک‌ها</a>
+    <a href="#">تایم‌لاین</a>
+    <a href="#">هدف</a>
+    <a href="#">شبکه‌های</a>
+    <a href="#">مقالات</a>
+    <a href="#">ویکی</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Progress Overview -->
+    <div class="overview-grid">
+      <div class="widget">
+        <h3>پیشرفت پروزه</h3>
+        <div class="progress-ring">
+          <svg width="120" height="120">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#eee" stroke-width="8" />
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#004666" stroke-width="8"
+              stroke-dasharray="314" stroke-dashoffset="188" stroke-linecap="round" />
+          </svg>
+          <div class="value">۴۰٪</div>
+        </div>
+        <div class="label">از ۱۲ تک — ۵ هفته باقی</div>
+      </div>
+
+      <div class="widget">
+        <h3>پیش‌نیازها</h3>
+        <ul class="milestone-list">
+          <li>
+            <span class="milestone-badge">TB-2026-10</span>
+            <span>نوامبر — فعال</span>
+            <span style="margin-inline-start:auto; color:#999; font-size:12px;">۶۰٪</span>
+          </li>
+          <li>
+            <span class="milestone-badge milestone-current">TB-2026-11</span>
+            <span>دسامبر — در انتظار</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="widget">
+        <h3>آخرین فعالیت‌ها</h3>
+        <ul class="activity-list">
+          <li class="activity-item">
+            <div class="activity-avatar">ه</div>
+            <div class="activity-content">
+              هکرز <span class="activity-badge">تغییر وضعیت</span>
+              تک ۱۴ را به <b>انجام شد</b> تغییر داد
+              <span class="activity-time">۲ ساعت پیش</span>
+            </div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-avatar" style="background:#555;">⚡</div>
+            <div class="activity-content">
+              <span class="activity-badge">هوش مصنوعی</span>
+              تک ۱۱ — «افزایش پوشش تست» ایجاد شد
+              <span class="activity-time">۵ ساعت پیش</span>
+            </div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-avatar">ه</div>
+            <div class="activity-content">
+              هکرز <span class="activity-badge">زمان</span>
+              ۱.۵ ساعت زمان ثبت کرد روی تک ۱۰
+              <span class="activity-time">دیروز</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Kanban Board -->
+    <h3 style="margin-bottom:15px; font-size:16px;">تک‌ها</h3>
+    <div class="kanban-board">
+
+      <!-- To Do Column -->
+      <div class="kanban-column">
+        <div class="kanban-column-header col-new">
+          <span>انجام نشده</span>
+          <span class="kanban-column-count">۴</span>
+        </div>
+        <div class="kanban-cards">
+          <div class="kanban-card type-feature">
+            <div class="card-title">پیاده‌سازی Webhook برای CI/CD</div>
+            <div class="card-meta">
+              <span class="priority-medium">P2</span>
+              <span class="subtask-count">۰/۲ زیرتک</span>
+              <div class="assignee-mini">ه</div>
+            </div>
+          </div>
+          <div class="kanban-card type-task">
+            <div class="card-title">تست یکپارچگی API پایگاه داده</div>
+            <div class="card-meta">
+              <span class="priority-low">P3</span>
+              <span class="subtask-count">۱/۳ زیرتک</span>
+              <div class="assignee-mini">ه</div>
+            </div>
+          </div>
+          <div class="kanban-card type-chore">
+            <div class="card-title">به‌روزرسانی اسناد API</div>
+            <div class="card-meta">
+              <span class="priority-low">P3</span>
+              <span class="subtask-count">—</span>
+            </div>
+          </div>
+          <div class="kanban-card type-bug">
+            <div class="card-title">اصلاح تاریخچه سفارشات ۴۰۴</div>
+            <div class="card-meta">
+              <span class="priority-high">P1</span>
+              <span class="subtask-count">۲/۴ زیرتک</span>
+              <div class="assignee-mini">ه</div>
+            </div>
+          </div>
+          <button class="add-task-card" onclick="document.body.classList.add('show-modal')">+ کار جدید</button>
+        </div>
+      </div>
+
+      <!-- In Progress Column -->
+      <div class="kanban-column">
+        <div class="kanban-column-header col-in-progress">
+          <span>در حال انجام</span>
+          <span class="kanban-column-count">۵</span>
+        </div>
+        <div class="kanban-cards">
+          <div class="kanban-card type-task">
+            <div class="card-title">ریفکتور ماژول گزارش‌گیری</div>
+            <div class="card-meta">
+              <span class="priority-medium">P2</span>
+              <span class="subtask-count">۳/۵ زیرتک</span>
+              <div class="assignee-mini">ه</div>
+            </div>
+          </div>
+          <div class="kanban-card type-bug">
+            <div class="card-title">تعمیر خطای Retry در سرویس اعلان</div>
+            <div class="card-meta">
+              <span class="priority-high">P1</span>
+              <span class="subtask-count">۱/۱ زیرتک</span>
+              <div class="assignee-mini">ه</div>
+            </div>
+          </div>
+          <div class="kanban-card type-feature">
+            <div class="card-title">افزودن پشتیبانی CSV Export</div>
+            <div class="card-meta">
+              <span class="priority-medium">P2</span>
+              <span class="subtask-count">۰/۳ زیرتک</span>
+              <div class="assignee-mini">ه</div>
+            </div>
+          </div>
+          <div class="kanban-card type-chore">
+            <div class="card-title">ارتقاء پیکربندی Nginx</div>
+            <div class="card-meta">
+              <span class="priority-low">P3</span>
+              <span class="subtask-count">۱/۱ زیرتک</span>
+            </div>
+          </div>
+          <div class="kanban-card type-task">
+            <div class="card-title">پیاده‌سازی CI/CD Pipeline</div>
+            <div class="card-meta">
+              <span class="priority-medium">P2</span>
+              <span class="subtask-count">۲/۶ زیرتک</span>
+              <div class="assignee-mini">ه</div>
+            </div>
+          </div>
+          <button class="add-task-card" onclick="document.body.classList.add('show-modal')">+ کار جدید</button>
+        </div>
+      </div>
+
+      <!-- Blocked Column -->
+      <div class="kanban-column">
+        <div class="kanban-column-header col-blocked">
+          <span>بلوکه</span>
+          <span class="kanban-column-count">۱</span>
+        </div>
+        <div class="kanban-cards">
+          <div class="kanban-card type-bug">
+            <div class="card-title">تعمیر خطای ۵۰۰ در Endpoint احراز هویت</div>
+            <div class="card-meta">
+              <span class="priority-high">P1</span>
+              <span class="subtask-count">—</span>
+              <div class="assignee-mini">ه</div>
+            </div>
+            <div style="margin-top:8px; padding:6px; background:#ffebee; border-radius:4px; font-size:11px; color:#c62828;">
+              ⚠ منتظر تأیید مالک — تغییر ساختار JWT
+            </div>
+          </div>
+          <button class="add-task-card" onclick="document.body.classList.add('show-modal')">+ کار جدید</button>
+        </div>
+      </div>
+
+      <!-- Done Column -->
+      <div class="kanban-column">
+        <div class="kanban-column-header col-done">
+          <span>انجام شد</span>
+          <span class="kanban-column-count">۲</span>
+        </div>
+        <div class="kanban-cards">
+          <div class="kanban-card type-task" style="opacity:0.75;">
+            <div class="card-title">راه‌اندازی ساختار پروزه Docker</div>
+            <div class="card-meta">
+              <span class="priority-high">P0</span>
+              <div class="assignee-mini">ه</div>
+            </div>
+          </div>
+          <div class="kanban-card type-feature" style="opacity:0.75;">
+            <div class="card-title">پیاده‌سازی سیستم اعلان Telegram</div>
+            <div class="card-meta">
+              <span class="priority-medium">P2</span>
+              <div class="assignee-mini">ه</div>
+            </div>
+          </div>
+          <button class="add-task-card" onclick="document.body.classList.add('show-modal')">+ کار جدید</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Add Task Modal -->
+  <div class="modal-overlay" id="taskModal" onclick="if(event.target===this)document.body.classList.remove('show-modal')">
+    <div class="modal-dialog">
+      <h2>ایجاد کار جدید</h2>
+      <form id="newTask">
+        <div class="form-row">
+          <label for="taskName">عنوان *</label>
+          <input type="text" id="taskName" placeholder="خلاصه کار را وارد کنید..." required />
+        </div>
+        <div class="form-row">
+          <label for="taskDesc">شرح</label>
+          <textarea id="taskDesc" placeholder="هدف و معیارهای پذیرش..."></textarea>
+        </div>
+        <div class="form-row">
+          <label for="taskType">نوع</label>
+          <select id="taskType">
+            <option value="task">تک</option>
+            <option value="bug">باگ</option>
+            <option value="feature">ویژگی</option>
+            <option value="chore">کار روتین</option>
+          </select>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+          <div class="form-row">
+            <label for="taskPriority">اولویت</label>
+            <select id="taskPriority">
+              <option value="P0">P0 — فوری</option>
+              <option value="P1">P1 — بالا</option>
+              <option value="P2" selected>P2 — متوسط</option>
+              <option value="P3">P3 — پایین</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="taskMilestone">پیش‌نیاز</label>
+            <select id="taskMilestone">
+              <option value="1">TB-2026-10 — نوامبر</option>
+              <option value="2">TB-2026-11 — دسامبر</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" onclick="document.body.classList.remove('show-modal')">انصراف</button>
+          <button type="submit" class="btn-save">ذخیره</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Simple modal toggle
+    document.getElementById('newTask').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('کار «' + document.getElementById('taskName').value + '» ایجاد شد.\n\nدر نسخهٔ واقعی، این از طریق JSON-RPC API لینتایم ذخیره می‌شود.');
+      document.body.classList.remove('show-modal');
+    });
+  </script>
+
+</body>
+</html>

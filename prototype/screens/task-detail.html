@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تک ۱۱ — افزایش پوشش تست | ربات معامله‌گر</title>
+  <link rel="stylesheet" href="../css/task-detail.css" />
+</head>
+<body>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="#">پروزه‌ها</a><span>›</span>
+    <a href="#">ربات معامله‌گر</a><span>›</span>
+    تک ۱۱
+  </div>
+
+  <!-- Task Header -->
+  <div class="task-header">
+    <h1>افزایش پوشش تست واحد ماژول API</h1>
+    <div class="task-status-bar">
+      <span class="status-badge status-in-progress">در حال انجام</span>
+      <span class="status-badge" style="background:#e8f5e9; color:#2e7d32;">P2 — متوسط</span>
+      <span class="task-meta">
+        <span class="task-meta-item">👤 هکرز</span>
+        <span class="task-meta-item">📅 ایجاد: ۱۴۰۵/۰۷/۱۲</span>
+        <span class="task-meta-item">⏱ ۳/۵ ساعت</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Task Tabs -->
+  <div class="task-tabs">
+    <a href="#" class="active">شرح</a>
+    <a href="#">تک‌ها</a>
+    <a href="#">تایم‌لاین</a>
+    <a href="#">مربوطه‌ها</a>
+    <a href="#">فایل‌ها</a>
+  </div>
+
+  <!-- Task Layout -->
+  <div class="task-layout">
+
+    <!-- Main Column -->
+    <div class="task-main">
+
+      <!-- Description -->
+      <div class="task-description">
+        <h2>شرح</h2>
+        <div class="desc-body">
+          <h3>زمینه</h3>
+          <p>ماژول API ربات معامله‌گر در حال حاضر پوشش تست ۴۵٪ دارد. نیاز به افزایش به حداقل ۷۰٪ قبل از انتشار v2.4 داریم.</p>
+
+          <h3>معیارهای پذیرش</h3>
+          <ul>
+            <li>پوشش تست ≥ ۷۰٪ (از ۴۵٪ فعلی)</li>
+            <li>همه تست‌های واحد پاس شوند</li>
+            <li>کاوراج ریپورت در CI/CD ادغام شود</li>
+            <li>دستورالعمل اضافه کردن تست جدید در اسناد ثبت شود</li>
+          </ul>
+
+          <h3>نکات فنی</h3>
+          <p>ماژول‌های هدف: <code>api/Controllers/TicketsController.php</code>، <code>Domain/Tickets/Repository.php</code>، <code>Core/Database/QueryBuilder.php</code>.</p>
+          <p>تست‌ها را با PHPUnit در پوشه <code>tests/Unit/</code> بنویسید.</p>
+
+          <h3>کد نمونه</h3>
+          <pre>
+public function testGetTicketById(): void
+{
+    $ticket = $this->createTicket();
+    $result = $this->repository->getTicket($ticket->id);
+    
+    $this->assertNotNull($result);
+    $this->assertEquals($ticket->id, $result->id);
+    $this->assertInstanceOf(Ticket::class, $result);
+}</pre>
+        </div>
+      </div>
+
+      <!-- Comments -->
+      <div class="task-comments">
+        <h2>نظرات (۳)</h2>
+
+        <div class="comment">
+          <div class="comment-avatar">ه</div>
+          <div class="comment-body">
+            <div class="comment-header">
+              <span class="comment-author">هکرز</span>
+              <span class="comment-time">۲ ساعت پیش</span>
+            </div>
+            <div class="comment-text">
+              توی تست ماژول QueryBuilder یه نکته مهم: تابع <code>sum()</code> نباید نام ستون رو با بک‌تیک ببنده — یه باگ ۱۰۶۴ SQL داشت که قبلاً درست شد. مطمئن شو تست جدید این رو هم پوشش بده.
+            </div>
+          </div>
+        </div>
+
+        <div class="comment">
+          <div class="comment-avatar ai">⚡</div>
+          <div class="comment-body">
+            <div class="comment-header">
+              <span class="comment-author">هوش مصنوعی (hermes-traderbot)</span>
+              <span class="comment-badge">هوش مصنوعی</span>
+              <span class="comment-time">۵ ساعت پیش</span>
+            </div>
+            <div class="comment-text">
+              زیرتک ۱ و ۲ تکمیل شد. پوشش تست از ۴۵٪ به ۵۸٪ رسید. فایل‌های تست جدید: <br />
+              • <code>tests/Unit/TicketsRepositoryTest.php</code> (۱۲ تست)<br />
+              • <code>tests/Unit/QueryBuilderTest.php</code> (۸ تست)<br />
+              زیرتک ۳ در حال انجام.
+            </div>
+          </div>
+        </div>
+
+        <div class="comment">
+          <div class="comment-avatar">ه</div>
+          <div class="comment-body">
+            <div class="comment-header">
+              <span class="comment-author">هکرز</span>
+              <span class="comment-time">دیروز</span>
+            </div>
+            <div class="comment-text">
+              عالیه. تمرکزت رو بذار روی ماژول Controllers. اون پیچیده‌تره و نیاز به تست بیشتر داره.
+            </div>
+          </div>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="comment-form">
+          <textarea placeholder="نظر خود را بنویسید..."></textarea>
+          <div class="comment-form-actions">
+            <button class="btn-save" style="padding:8px 20px; border:none; border-radius:6px; background:var(--accent1); color:#fff; cursor:pointer; font-family:'Vazirmatn',sans-serif;">ارسال نظر</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="task-sidebar">
+
+      <!-- Subtasks -->
+      <div class="sidebar-widget">
+        <h3>زیرتک‌ها (۲/۳)</h3>
+        <div class="subtask-progress-bar">
+          <div class="fill" style="width:66%"></div>
+        </div>
+        <ul class="subtask-list">
+          <li class="subtask-item done">
+            <div class="subtask-check done">✓</div>
+            <span class="subtask-title">تست ماژول Repository</span>
+          </li>
+          <li class="subtask-item done">
+            <div class="subtask-check done">✓</div>
+            <span class="subtask-title">تست ماژول QueryBuilder</span>
+          </li>
+          <li class="subtask-item">
+            <div class="subtask-check"></div>
+            <span class="subtask-title">تست ماژول Controllers</span>
+          </li>
+        </ul>
+        <div class="subtask-progress">۲ از ۳ تکمیل</div>
+      </div>
+
+      <!-- Details -->
+      <div class="sidebar-widget">
+        <h3>جزئیات</h3>
+        <div class="detail-grid">
+          <div class="detail-row">
+            <span class="detail-label">پروزه</span>
+            <span class="detail-value">ربات معامله‌گر</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">نوع</span>
+            <span class="detail-value">تک</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">اولویت</span>
+            <span class="detail-value">P2</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">مسئول</span>
+            <span class="detail-value">هکرز</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">پیش‌نیاز</span>
+            <span class="detail-value">TB-2026-10</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">تخمین</span>
+            <span class="detail-value">۵ ساعت</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">زمان ثبت</span>
+            <span class="detail-value">۳/۵ ساعت</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="sidebar-widget">
+        <h3>برچسب‌ها</h3>
+        <div class="tags">
+          <span class="tag repo">repo:tradersbot</span>
+          <span class="tag">kind:feature</span>
+          <span class="tag">agent:hermes-traderbot</span>
+        </div>
+      </div>
+
+      <!-- Dependencies -->
+      <div class="sidebar-widget">
+        <h3>وابستگی‌ها</h3>
+        <div class="dependency-item">
+          <span class="dependency-arrow">←</span>
+          <span>تک ۱۰ — تعمیر خطای ۵۰۰</span>
+          <span class="status-badge status-done" style="font-size:10px;">انجام شد</span>
+        </div>
+        <div class="dependency-item">
+          <span class="dependency-arrow">→</span>
+          <span>تک ۱۳ — ادغام کاوراج در CI</span>
+          <span class="status-badge status-new" style="font-size:10px;">انجام نشده</span>
+        </div>
+      </div>
+
+      <!-- Time Log -->
+      <div class="sidebar-widget">
+        <h3>ثبت زمان</h3>
+        <div class="time-log">
+          <div class="time-entry">
+            <span>هکرز — ریپت تست</span>
+            <span>۱/۵ ساعت</span>
+          </div>
+          <div class="time-entry">
+            <span>هکرز — ریپت تست</span>
+            <span>۲ ساعت</span>
+          </div>
+          <div style="border-top:1px solid #eee; padding-top:8px; margin-top:8px; font-weight:600; text-align:center;">
+            جمع: ۳/۵ ساعت
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
