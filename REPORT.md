@@ -49,6 +49,7 @@
 | Company Settings for CSS | ❌ | **No** custom-CSS setting in Company Settings UI — file must be placed in theme directory |
 | Plugin CSS injection | ✅ | `pluginCss` filter in `CssLoader.php` + `dispatch_filter('pluginCss', [])` |
 | Template event hooks | ✅ | `@dispatchEvent('afterThemeColors')`, `afterLinkTags`, `afterMainScriptTag` |
+| Custom translation overrides | ✅ | `app/custom/Language/<locale>.ini` is loaded **in addition to** the shipped `app/Language/<locale>.ini` — lets us fix/improve Persian strings without patching vendor files (upgrade-safe; the shipped `fa-IR.ini` is restored on every image update, our overrides survive in the `custom/` path) |
 | Inline runtime style setters | ✅ | Login HTML emits `<style id="colorSchemeSetter">` (`--accent1`/`--accent2`) and `<style id="fontStyleSetter">` (`--primary-font-family:'roboto'`) — **this is why the Vazirmatn override uses `!important`**: the inline `:root` setter (specificity 0+1+0) would otherwise win over a plain redeclaration |
 
 ### 2.3 RTL Coverage in Shipped CSS — GAPS IDENTIFIED
@@ -154,6 +155,7 @@ Repository: **https://github.com/h4z4rd95/leantime-persian-rtl**
 | E12 | DB credentials accessible, schema confirmed | `plink` → `docker exec leantime-xyopsc-db-1 mariadb ...` |
 | E13 | Git push verified: HEAD == origin/main | `git rev-parse HEAD` = `6eab52d...` |
 | E14 | Inline runtime `<style id="fontStyleSetter">` sets `--primary-font-family:'roboto'`; `colorSchemeSetter` sets `--accent1:#004666`, `--accent2:#00a887` | login page HTML (`/auth/login`), confirmed by live-asset recon |
+| E15 | `app/custom/Language/<locale>.ini` overlay mechanism for translation overrides without vendor patching | `app/Core/UI/Language.php` (custom-language path resolution); upstream-source research |
 
 ---
 
