@@ -49,6 +49,7 @@
 | Company Settings for CSS | ❌ | **No** custom-CSS setting in Company Settings UI — file must be placed in theme directory |
 | Plugin CSS injection | ✅ | `pluginCss` filter in `CssLoader.php` + `dispatch_filter('pluginCss', [])` |
 | Template event hooks | ✅ | `@dispatchEvent('afterThemeColors')`, `afterLinkTags`, `afterMainScriptTag` |
+| Inline runtime style setters | ✅ | Login HTML emits `<style id="colorSchemeSetter">` (`--accent1`/`--accent2`) and `<style id="fontStyleSetter">` (`--primary-font-family:'roboto'`) — **this is why the Vazirmatn override uses `!important`**: the inline `:root` setter (specificity 0+1+0) would otherwise win over a plain redeclaration |
 
 ### 2.3 RTL Coverage in Shipped CSS — GAPS IDENTIFIED
 
@@ -152,6 +153,7 @@ Repository: **https://github.com/h4z4rd95/leantime-persian-rtl**
 | E11 | 4×4 Vazirmatn WOFF2 files downloaded and verified | jsDelivr CDN → `prototype/fonts/` |
 | E12 | DB credentials accessible, schema confirmed | `plink` → `docker exec leantime-xyopsc-db-1 mariadb ...` |
 | E13 | Git push verified: HEAD == origin/main | `git rev-parse HEAD` = `6eab52d...` |
+| E14 | Inline runtime `<style id="fontStyleSetter">` sets `--primary-font-family:'roboto'`; `colorSchemeSetter` sets `--accent1:#004666`, `--accent2:#00a887` | login page HTML (`/auth/login`), confirmed by live-asset recon |
 
 ---
 
