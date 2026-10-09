@@ -39,14 +39,66 @@ i18n endpoint returns 2859 keys, **0 Persian**. Dashboard after real login rende
 ("My Projects", "Favorites", "Recent"). en-US.ini has 3506 lines, so fa-IR is also **636 keys short**.
 This is the core P0 item: "ترجمه کامل" was never done.
 
-## Fix plan
+## Execution results (2026-10-09, all verified against production)
 
-1. **B1**: rebuild `custom.min.css` with absolute font paths `/userfiles/rtl-fonts/...`
-   (or copy fonts to `/public/theme/default/fonts/`).
-2. **B2**: force `--primary-font-family: 'Vazirmatn'` for the login/unauthenticated path
-   (CSS override with high specificity in custom.min.css, since we can't set usersettings for anon).
-3. **B3**: build a complete Persian translation via the upgrade-safe overlay
-   `app/custom/Language/fa-IR.ini` (loaded after the shipped file per `Language.php:readIni`),
-   covering all 2170+ shipped keys + the 636 missing ones. Then clear the
-   `languages.lang_fa-IR` cache so it takes effect.
-4. Backup DB + files before any change; test login + dashboard after; push to repo.
+### Fixes applied and verified
+
+| Bug | Fix | Verification |
+|---|---|---|
+| **B1** font 404 | `url('fonts/...')` → `url('/userfiles/rtl-fonts/...')` in `custom.min.css` | `HEAD /userfiles/rtl-fonts/Vazirmatn-{Regular,Bold}.woff2` → **200 font/woff2**; CSS served 17650 bytes with absolute paths |
+| **B2** login font roboto | CSS forces `--primary-font-family:'Vazirmatn'` + body/input/textarea/select/button on `[dir="rtl"]` | login page renders Persian, font override present 2× in served CSS |
+| **B3** translation missing | Full **2906-key** Persian overlay at `custom/Language/fa-IR.ini` (correct path: `APP_ROOT.'/custom/Language/'`, not `app/custom/`) | `parse_ini_file` → 2906 entries; `readIni()` → 2965 keys with `آدرس ایمیل را وارد کنید` |
+| overflow | `overflow-x:hidden` on `[dir=rtl] body`, `auto` on kanban/maincontent | in served CSS ✅ |
+
+### Live page-by-page test (real admin login, dir + Persian word count)
+
+| Route | HTTP | Persian words | html |
+|---|---|---|---|
+| /auth/login | 200 | placeholders `آدرس ایمیل را وارد کنید` / `رمز عبور را وارد کنید` | `<html dir="rtl" lang="fa-IR">` ✅ |
+| /dashboard/home | 200 | 99 | `<html dir="rtl" lang="fa-IR">` ✅ |
+| /projects/showAll | 200 | 139 | `<html dir="rtl" lang="fa-IR">` ✅ |
+| /tickets/showAll | 200 | **1194** | `<html dir="rtl" lang="fa-IR">` ✅ |
+| /calendar/showMyCalendar | 200 | 105 | `<html dir="rtl" lang="fa-IR">` ✅ |
+| /users/showAll | 200 | 148 | `<html dir="rtl" lang="fa-IR">` ✅ |
+| /setting/editCompanySettings | 200 | 305 | `<html dir="rtl" lang="fa-IR">` ✅ |
+| /timesheets/showAll | 200 | 207 | `<html dir="rtl" lang="fa-IR">` ✅ |
+| /strategy/showBoards | 200 | 325 | `<html dir="rtl" lang="fa-IR">` ✅ |
+
+### Gotchas hit (recorded so they aren't repeated)
+
+1. **INI comment char**: PHP's `parse_ini_file` only accepts `;` comments. A `#` header
+   containing `(` made the whole overlay fail to parse silently — the app fell back to
+   the shipped English file with no error in logs. Symptom: PHP probe showed translations
+   working but HTTP endpoints still returned English.
+2. **Overlay path**: `CUSTOM_LANG_FOLDER = APP_ROOT.'/custom/Language/'` — the overlay
+   belongs at `/var/www/html/custom/Language/`, NOT `/var/www/html/app/custom/Language/`.
+3. **Cache layers**: clearing `storage/framework/cache/installation/data/*` alone was not
+   enough. Full clear = `cache:clear` + purge `storage/framework/cache/*` and
+   `storage/framework/views/*`, then restart php-fpm (opcache `revalidate_freq=60`).
+4. **Subagent delegation for bulk translation is unreliable** — 3 of 4 translation
+   subagents stalled for ~50 minutes reading the input file repeatedly instead of
+   writing. Translating inline via a generated dict was both faster and verifiable.
+
+## Rollback (verified artifacts)
+
+Pre-change backup at server `/root/lt-backup-pre-p0/`:
+`lt-full-2026-10-09-1144.sql.gz` (DB), `files-and-lang.tgz` (theme CSS + fonts + Language),
+`docker-compose.yml`.
+
+```bash
+# Revert translation overlay (app returns to shipped fa-IR.ini)
+docker exec code-leantime-1 rm /var/www/html/custom/Language/fa-IR.ini
+# Revert CSS (restores stock Leantime styling + broken font path)
+docker cp /root/lt-backup-pre-p0/theme-css/custom.min.css code-leantime-1:/var/www/html/public/theme/default/css/custom.min.css
+# Clear cache
+docker exec code-leantime-1 sh -c "rm -rf /var/www/html/storage/framework/cache/* /var/www/html/storage/framework/views/*"
+# Full DB restore if needed
+docker cp /root/lt-backup-pre-p0/lt-full-*.sql.gz code-db-1:/tmp/ && docker exec code-db-1 sh -c "zcat /tmp/lt-full-*.sql.gz | mariadb -uleantime -p995ec6c230c962a3888074dfd21730ce leantime"
+```
+
+## Commit
+
+`2ddb692f1bf7ce1b0782addef3214d4a2e82d231` — pushed to `main` on
+`h4z4rd95/leantime-persian-rtl`
+(https://github.com/h4z4rd95/leantime-persian-rtl/commit/2ddb692f1bf7ce1b0782addef3214d4a2e82d231)
+
