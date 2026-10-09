@@ -5,13 +5,11 @@
 | Item | Value |
 |---|---|
 | Target | `https://leantime.ppsj.ir` (Leantime v3.10.0) |
-| Host | Hetzner CX (`65.109.204.200`), Dokploy/Docker |
+| Host | Hetzner CX (`65.109.210.40`), Dokploy/Docker |
 | Image | `leantime/leantime:latest` → **pin to `3.10.0`** |
-| SSH access | `plink -ssh -batch -pw 'kwCqijsJeqmxvncrs9xw%' root@65.109.204.200` |
-| DB creds | `/root/.leantime-db-password` (on host) |
-| DB container | `leantime-xyopsc-db-1` (mariadb:11) |
-| App container | `leantime-xyopsc-leantime-1` |
-| Volumes | `leantime-xyopsc_db-data`, `leantime-xyopsc_leantime-files`, `leantime-xyopsc_leantime-public` |
+| SSH access | key `~/.ssh/hermes_desktop_key` (`ssh -i ... root@65.109.210.40`) |
+| App container | `code-leantime-1` |
+| DB container | `code-db-1` (MariaDB) |
 | Font license | **OFL-1.1** (Vazirmatn) — self-host permitted ✅ |
 | CSP constraint | `font-src 'self' data: unpkg.com` — fonts must be same-origin |
 

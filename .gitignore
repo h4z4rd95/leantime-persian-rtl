@@ -15,3 +15,7 @@ prototype/fonts/
 .vscode/
 *.swp
 *.swo
+
+# Scratch translation work area (chunks, intermediate JSON, upstream dumps)
+# The canonical source is translations/fa-IR.json — commit that, not the work area.
+work/
