@@ -1,0 +1,409 @@
+/* =========================================================================
+   123Service — Leantime Persian RTL Premium Theme
+   Target: Leantime v3.10.0
+   Deploy: public/theme/default/css/custom.min.css  (AFTER light.css)
+   Fonts:  Vazirmatn (OFL-1.1)
+   =========================================================================
+   This is the *visual* layer on top of shared-rtl-foundation.
+   Foundation only flips direction. THIS is what makes it look Persian-professional.
+   ========================================================================= */
+
+/* ── 1. Brand Palette — deep teal + warm sand on dark slate ─────────── */
+
+:root {
+  /* Brand: Persian Gulf teal */
+  --accent1: #0e7490 !important;
+  --accent1-hsl: 188, 81%, 31% !important;
+  --accent1-hover: #0891b2 !important;
+  --accent1-color: #f8fafc !important;
+
+  /* Accent: Persian saffron */
+  --accent2: #d97706 !important;
+  --accent2-hsl: 32, 92%, 44% !important;
+  --accent2-hover: #b45309 !important;
+  --accent2-color: #fffbeb !important;
+
+  --focus-ring-color: #06b6d4 !important;
+
+  /* Surfaces */
+  --background-color: #f1f5f9 !important;
+  --main-content-bg: #ffffff !important;
+  --tab-background: #ffffff !important;
+  --card-bg: #ffffff !important;
+
+  /* Type */
+  --primary-font-family: 'Vazirmatn', 'Roboto', sans-serif !important;
+  --secondary-font-family: 'Vazirmatn', 'Roboto', sans-serif !important;
+}
+
+/* ── 2. Typography — Persian numerals + proper line heights ─────────── */
+
+[dir="rtl"] body, [dir="rtl"] input, [dir="rtl"] textarea, [dir="rtl"] select,
+[dir="rtl"] button, [dir="rtl"] .editor-content, [dir="rtl"] .tiptap {
+  font-family: 'Vazirmatn', 'Roboto', 'Helvetica Neue', sans-serif !important;
+  font-feature-settings: "ss01", "ss02", "ss03", "cv01", "cv02" !important;
+  line-height: 1.85 !important;
+  letter-spacing: 0 !important;
+}
+
+/* Persian digits everywhere */
+[dir="rtl"] {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Headings tighter for Persian */
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5 {
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  letter-spacing: -0.01em !important;
+}
+
+[dir="rtl"] h1 { font-size: 1.6rem !important; }
+[dir="rtl"] h2 { font-size: 1.3rem !important; }
+
+/* ── 3. Sidebar / Navigation — the main "wow" surface ───────────────── */
+
+[dir="rtl"] #sidenav, [dir="rtl"] .mainnavigation, [dir="rtl"] nav.mainnavigation,
+[dir="rtl"] .sideNavigation, [dir="rtl"] [class*="sidenav"] {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%) !important;
+  border-left: 1px solid rgba(148, 163, 184, 0.15) !important;
+  border-right: none !important;
+}
+
+[dir="rtl"] #sidenav a, [dir="rtl"] .mainnavigation a,
+[dir="rtl"] nav.mainnavigation a, [dir="rtl"] [class*="sidenav"] a {
+  color: #cbd5e1 !important;
+  font-weight: 500 !important;
+  transition: all 0.18s ease !important;
+  border-radius: 0.5rem !important;
+}
+
+[dir="rtl"] #sidenav a:hover, [dir="rtl"] .mainnavigation a:hover,
+[dir="rtl"] nav.mainnavigation a:hover, [dir="rtl"] [class*="sidenav"] a:hover {
+  background: rgba(14, 116, 144, 0.28) !important;
+  color: #ecfeff !important;
+}
+
+[dir="rtl"] #sidenav a.active, [dir="rtl"] .mainnavigation a.active,
+[dir="rtl"] nav.mainnavigation a.active, [dir="rtl"] [class*="sidenav"] a.active,
+[dir="rtl"] #sidenav li.active > a, [dir="rtl"] .mainnavigation li.active > a {
+  background: linear-gradient(90deg, rgba(14,116,144,0.9), rgba(8,145,178,0.55)) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px -4px rgba(14, 116, 144, 0.7) !important;
+}
+
+/* Nav icons aligned right */
+[dir="rtl"] #sidenav svg, [dir="rtl"] .mainnavigation svg {
+  margin-left: 0.6rem !important;
+  margin-right: 0 !important;
+  flex-shrink: 0;
+}
+
+/* ── 4. Cards & panels — soft elevation ─────────────────────────────── */
+
+[dir="rtl"] .card, [dir="rtl"] .panel, [dir="rtl"] .widget,
+[dir="rtl"] [class*="card"]:not([class*="cardless"]) {
+  border-radius: 0.75rem !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  transition: box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+
+[dir="rtl"] .card:hover, [dir="rtl"] .panel:hover,
+[dir="rtl"] [class*="card"]:hover:not([class*="cardless"]) {
+  box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.18) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ── 5. Buttons — premium feel ──────────────────────────────────────── */
+
+[dir="rtl"] .btn-primary, [dir="rtl"] button[class*="primary"],
+[dir="rtl"] a[class*="btn-primary"], [dir="rtl"] input[type="submit"] {
+  background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px -2px rgba(14, 116, 144, 0.6) !important;
+  transition: all 0.18s ease !important;
+}
+
+[dir="rtl"] .btn-primary:hover, [dir="rtl"] button[class*="primary"]:hover,
+[dir="rtl"] a[class*="btn-primary"]:hover, [dir="rtl"] input[type="submit"]:hover {
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%) !important;
+  box-shadow: 0 6px 18px -4px rgba(14, 116, 144, 0.75) !important;
+  transform: translateY(-1px) !important;
+}
+
+[dir="rtl"] .btn-secondary, [dir="rtl"] button:not([class*="primary"]):not([class*="danger"]):not([class*="ghost"]) {
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  transition: all 0.18s ease !important;
+}
+
+/* ── 6. Tables — clean Persian reading rhythm ───────────────────────── */
+
+[dir="rtl"] table thead th, [dir="rtl"] table th {
+  background: #f8fafc !important;
+  color: #334155 !important;
+  font-weight: 700 !important;
+  text-align: right !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+  white-space: nowrap;
+}
+
+[dir="rtl"] table tbody td {
+  text-align: right !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  padding: 0.65rem 0.85rem !important;
+}
+
+[dir="rtl"] table tbody tr {
+  transition: background 0.15s ease !important;
+}
+
+[dir="rtl"] table tbody tr:hover {
+  background: #f0fdfa !important;
+}
+
+/* ── 7. Forms — comfortable Persian input spacing ───────────────────── */
+
+[dir="rtl"] input[type="text"], [dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="password"], [dir="rtl"] input[type="number"],
+[dir="rtl"] input[type="date"], [dir="rtl"] input[type="time"],
+[dir="rtl"] textarea, [dir="rtl"] select {
+  text-align: right !important;
+  direction: rtl !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid #cbd5e1 !important;
+  padding: 0.55rem 0.8rem !important;
+  font-family: 'Vazirmatn', sans-serif !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+[dir="rtl"] input:focus, [dir="rtl"] textarea:focus, [dir="rtl"] select:focus {
+  border-color: #0e7490 !important;
+  box-shadow: 0 0 0 3px rgba(14, 116, 144, 0.15) !important;
+  outline: none !important;
+}
+
+/* placeholders */
+[dir="rtl"] input::placeholder, [dir="rtl"] textarea::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+/* ── 8. Badges, pills, status chips ─────────────────────────────────── */
+
+[dir="rtl"] .badge, [dir="rtl"] [class*="badge"], [dir="rtl"] [class*="pill"],
+[dir="rtl"] [class*="chip"], [dir="rtl"] .ticketStatus {
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  padding: 0.2rem 0.7rem !important;
+  letter-spacing: 0 !important;
+}
+
+/* ── 9. Modals / dialogs ────────────────────────────────────────────── */
+
+[dir="rtl"] .modal-dialog, [dir="rtl"] [role="dialog"],
+[dir="rtl"] [class*="modal"]:not([class*="modal-"][class*="-open"]) {
+  border-radius: 1rem !important;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.45) !important;
+}
+
+[dir="rtl"] .modal-header [class*="close"], [dir="rtl"] [class*="modal"] button[aria-label*="Close"],
+[dir="rtl"] [class*="modal"] [class*="close"] {
+  left: 1rem !important;
+  right: auto !important;
+}
+
+/* ── 10. Login page — the storefront ────────────────────────────────── */
+
+[dir="rtl"] body.login, [dir="rtl"] [class*="loginPage"],
+[dir="rtl"] .auth-wrapper, [dir="rtl"] #loginForm {
+  background: linear-gradient(135deg, #0f172a 0%, #155e75 45%, #0e7490 100%) !important;
+  min-height: 100vh !important;
+}
+
+[dir="rtl"] body.login .card, [dir="rtl"] body.login [class*="loginBox"],
+[dir="rtl"] body.login form {
+  border-radius: 1.25rem !important;
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.55) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+[dir="rtl"] body.login h1, [dir="rtl"] body.login h2,
+[dir="rtl"] body.login [class*="loginTitle"], [dir="rtl"] body.login [class*="title"] {
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Brand logo area */
+[dir="rtl"] body login img, [dir="rtl"] body.login img[class*="logo"],
+[dir="rtl"] [class*="logoImg"] {
+  border-radius: 0.75rem !important;
+  object-fit: contain !important;
+}
+
+/* ── 11. Kanban / boards ────────────────────────────────────────────── */
+
+[dir="rtl"] .kanban-board [class*="column"], [dir="rtl"] [class*="kanbanCol"],
+[dir="rtl"] [class*="boardCol"] {
+  border-radius: 0.75rem !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[dir="rtl"] .kanban-card, [dir="rtl"] [class*="kanbanCard"],
+[dir="rtl"] [class*="boardCard"] {
+  border-radius: 0.6rem !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08) !important;
+  border: 1px solid #e2e8f0 !important;
+  transition: all 0.18s ease !important;
+}
+
+[dir="rtl"] .kanban-card:hover, [dir="rtl"] [class*="kanbanCard"]:hover,
+[dir="rtl"] [class*="boardCard"]:hover {
+  box-shadow: 0 8px 20px -6px rgba(15, 23, 42, 0.22) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ── 12. Notifications / toasts ─────────────────────────────────────── */
+
+[dir="rtl"] [class*="notification"], [dir="rtl"] [class*="toast"],
+[dir="rtl"] [class*="alert"]:not([class*="alert-"][class*="-danger"]) {
+  border-radius: 0.6rem !important;
+  border: none !important;
+  box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.25) !important;
+}
+
+[dir="rtl"] [class*="notification"] [class*="icon"],
+[dir="rtl"] [class*="toast"] [class*="icon"] {
+  margin-left: 0.75rem !important;
+  margin-right: 0 !important;
+}
+
+/* ── 13. Scrollbar — subtle polish ───────────────────────────────────── */
+
+[dir="rtl"] ::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+[dir="rtl"] ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[dir="rtl"] ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+[dir="rtl"] ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ── 14. Date/time pickers ───────────────────────────────────────────── */
+
+[dir="rtl"] [class*="datepicker"], [dir="rtl"] [class*="date-picker"],
+[dir="rtl"] [class*="calendar"], [dir="rtl"] [class*="timePicker"] {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+[dir="rtl"] [class*="datepicker"] [class*="prev"],
+[dir="rtl"] [class*="calendar"] [class*="prev"] {
+  left: auto !important;
+  right: 0.5rem !important;
+}
+
+[dir="rtl"] [class*="datepicker"] [class*="next"],
+[dir="rtl"] [class*="calendar"] [class*="next"] {
+  right: auto !important;
+  left: 0.5rem !important;
+}
+
+/* ── 15. Progress bars / meters ─────────────────────────────────────── */
+
+[dir="rtl"] [class*="progress"], [dir="rtl"] [class*="meter"],
+[dir="rtl"] progress {
+  border-radius: 9999px !important;
+  overflow: hidden !important;
+}
+
+[dir="rtl"] [class*="progress-bar"], [dir="rtl"] [class*="progressFill"],
+[dir="rtl"] [class*="meterFill"] {
+  border-radius: 9999px !important;
+  background: linear-gradient(90deg, #0e7490, #06b6d4) !important;
+}
+
+/* ── 16. Avatars ─────────────────────────────────────────────────────── */
+
+[dir="rtl"] [class*="avatar"], [dir="rtl"] img[class*="avatar"] {
+  border-radius: 9999px !important;
+  object-fit: cover !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.15) !important;
+}
+
+/* ── 17. Dropdown menus — open leftward in RTL ──────────────────────── */
+
+[dir="rtl"] [class*="dropdown"], [dir="rtl"] [class*="menu"],
+[dir="rtl"] [class*="popover"] {
+  text-align: right !important;
+}
+
+[dir="rtl"] [class*="dropdown-menu"], [dir="rtl"] [class*="menuItems"] {
+  left: auto !important;
+  right: 0 !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 15px 40px -12px rgba(15, 23, 42, 0.3) !important;
+  border: 1px solid #e2e8f0 !important;
+  padding: 0.4rem !important;
+}
+
+[dir="rtl"] [class*="dropdown-item"], [dir="rtl"] [class*="menuItem"] {
+  border-radius: 0.4rem !important;
+  transition: background 0.12s ease !important;
+}
+
+[dir="rtl"] [class*="dropdown-item"]:hover, [dir="rtl"] [class*="menuItem"]:hover {
+  background: #f0fdfa !important;
+  color: #0e7490 !important;
+}
+
+/* ── 18. Tabs ────────────────────────────────────────────────────────── */
+
+[dir="rtl"] [class*="tab"], [dir="rtl"] [role="tab"] {
+  text-align: right !important;
+  border-radius: 0.5rem 0.5rem 0 0 !important;
+  font-weight: 600 !important;
+}
+
+[dir="rtl"] [class*="tab"][class*="active"], [dir="rtl"] [role="tab"][aria-selected="true"] {
+  color: #0e7490 !important;
+  border-bottom: 2px solid #0e7490 !important;
+}
+
+/* ── 19. Selection ───────────────────────────────────────────────────── */
+
+::selection {
+  background: rgba(14, 116, 144, 0.25) !important;
+  color: #0f172a !important;
+}
+
+/* ── 20. Mobile / responsive RTL guard ──────────────────────────────── */
+
+@media (max-width: 768px) {
+  [dir="rtl"] #sidenav, [dir="rtl"] .mainnavigation,
+  [dir="rtl"] nav.mainnavigation, [dir="rtl"] [class*="sidenav"] {
+    transform: translateX(100%) !important;
+    transition: transform 0.25s ease !important;
+  }
+  [dir="rtl"] #sidenav.open, [dir="rtl"] .mainnavigation.open,
+  [dir="rtl"] nav.mainnavigation.open, [dir="rtl"] [class*="sidenav"].open {
+    transform: translateX(0) !important;
+  }
+}

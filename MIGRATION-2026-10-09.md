@@ -57,10 +57,29 @@ The server-side "evidence" (`pass_len=10`, missing `userdata` in session) was al
 
 **Discipline recorded in `phantom-debug-guard` skill:** never type a payload containing `$`, `!`, `^` into a shell command string. Write it to a file and use `--data @file` / `$(cat file)` / a python `requests` script. The working login test (`real_login.py`) does exactly this.
 
+## Theme: 123Service Premium RTL
+
+The shipped `custom.min.css` only flips direction (`[dir="rtl"]` overrides) — it does not restyle anything. A dedicated premium theme layer was added:
+
+- **Source:** `css/123service-premium-rtl.css` (human-readable, 20 sections)
+- **Deployed (minified, includes foundation):** `css/custom-premium.min.css` → server `public/theme/default/css/custom.min.css` (17 KB)
+- **Palette:** Persian Gulf teal `#0e7490` + saffron `#d97706`, replacing Leantime's default `#004666`/`#00a887`
+- **Typography:** Vazirmatn with `font-feature-settings` (ss01-ss03, cv01-cv02) + Persian line-heights
+- **Surfaces:** dark slate gradient sidebar (`#0f172a` → `#1e293b`), soft-elevation cards with hover lift, pill badges, gradient buttons with shadow
+- **Login page:** full-height teal gradient + blurred glass login card
+- **Kanban, tables, forms, modals, dropdowns (open leftward), datepickers, tabs, scrollbars, avatars, toasts** — all restyled RTL-aware
+
+### Font application bug (E14 follow-up)
+`themeFont` in `zp_settings` was `Atkinson Hyperlegible`. Leantime renders it into an inline `<style id="fontStyleSetter">` which **overrides** the CSS font variable. Fixed at the source:
+```sql
+UPDATE zp_settings SET value = 'Vazirmatn' WHERE `key` LIKE 'usersettings.%themeFont';
+```
+Verified post-fix: `--primary-font-family: 'Vazirmatn'` in the inline setter.
+
 ## What is left
 
-1. **Admin password for Dokploy** — verified UI/API reachable; full browser login flow not yet exercised end-to-end.
-2. **`/notifications`** — 404 on new server. Needs a check against the old server to confirm whether the notifications module was ever active (likely not — clean install path).
+1. **Dokploy admin login** — account exists (`owner@ppsj.ir`, role `admin`). Password is not stored in the Dokploy Postgres (better-auth). Reset flow is at `https://dokploy.ppsj.ir/send-reset-password`; it needs SMTP/email delivery, which has not been configured. **Needs the owner to trigger the reset and check inbox.**
+2. **`/notifications`** — 404; module likely never active on the old server either.
 3. **Hermes on the new server** — out of scope for this pass; see task section C.
 4. **Visual browser verification** — login verified programmatically (HTTP 303 + 200 on all authenticated pages, RTL confirmed in HTML). A human should still click through the UI once.
 
