@@ -19,3 +19,6 @@ prototype/fonts/
 # Scratch translation work area (chunks, intermediate JSON, upstream dumps)
 # The canonical source is translations/fa-IR.json — commit that, not the work area.
 work/
+
+# Local credentials (never commit)
+Leantime-Personal-Access-Token.txt
