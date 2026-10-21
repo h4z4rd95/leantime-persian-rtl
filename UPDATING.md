@@ -114,6 +114,15 @@ vendor دست‌نخورده می‌ماند.
   استفاده کنید.
 * **صفحه ورود فونت roboto می‌گرفت** چون مسیرهای بدون session
   `usersettings.themeFont` ندارند. CSS آن را به Vazirmatn اجبار می‌کند.
+* **gutter شبکه‌ی قدیمی `.row` را به راست فلیپ نکنید.** gutter shipped تک‌طرفه
+  است (`.row{margin-left:-20px}` و `-30px` در `min-width:1200px`) و جهت‌خنثی:
+  لبه‌ی راست row در هر دو جهت LTR/RTL flush با content-box می‌ماند. فلیپ gutter
+  به سمت راست (`margin-right:-20px`) row را به عرض ظرف+۲۰ می‌کند و به لبه‌ی چپ
+  می‌چسباند، پس ستون‌ها ۱۵–۵۰px از لبه‌ی راست viewport بیرون می‌زنند و
+  کنترل‌های سمت راست clip می‌شوند (۲۰۲۶-۱۰-۲۱: ۶۷ عنصر سرریز در ۱۴۴۰px روی
+  `/setting/editCompanySettings` و ۶ عنصر روی صفحه‌ی ورود عمومی؛ پس از اصلاح: ۰).
+  هندسه‌ی shipped در `css/shared-rtl-foundation.css` پین شده و
+  `python scripts/check_rtl_row_gutter.py` regression را نگه می‌دارد.
 
 ## Rollback
 

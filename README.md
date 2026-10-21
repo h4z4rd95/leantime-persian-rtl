@@ -190,6 +190,12 @@ When Leantime releases a new version:
 
 The `[dir="rtl"]` scoping means custom.css is 100% inert in LTR mode, so a broken Leantime upgrade that doesn't change `language.direction` won't trigger any of our rules.
 
+## Fixed defects (log)
+
+| Date | Defect | Fix | Evidence |
+|---|---|---|---|
+| 2026-10-21 | RTL right-edge overflow: legacy grid gutter was mirrored (`margin-left:0; margin-right:-20/-30px`), pushing `.row`/`.col-*` 15-50px past the right viewport edge, clipping right-side controls (settings, calendar, blueprints, login) | Pin shipped single-sided gutter geometry in `css/shared-rtl-foundation.css` + compiled `css/custom-premium.min.css`; guard with `scripts/check_rtl_row_gutter.py` | Isolated Leantime 3.10.0 test instance, real browser at 1440/1024/390px: overflowing elements on `/setting/editCompanySettings` 67→0 (1440px), `/blueprints/showBoards` 28→0, `/calendar/showMyCalendar` 13→0 (1024px), public `/auth/login` 6→0 at all widths; `html[dir="rtl"]` body still RTL, Vazirmatn still computed font |
+
 ## What's NOT Covered (known limitations)
 
 | Area | Status | Notes |

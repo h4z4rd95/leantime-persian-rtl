@@ -67,17 +67,29 @@ html[dir="rtl"] .monospace {
 
 /* ── 2. Physical Margin Flips ───────────────────────────────────────────── */
 
-/* Leantime row gutter: margin-left:-30px (min-width:1200px) flips to right */
+/* Leantime's legacy grid gutter is single-sided (shipped: .row{margin-left:
+   -20px}, @1200px -30px) and direction-NEUTRAL: with an auto-width block the
+   formula width = containing - margin-left - margin-right keeps the row's
+   RIGHT edge flush with the container's content box in both LTR and RTL.
+   Mirroring the gutter (margin-left:0; margin-right:-20/-30px) instead makes
+   the row containing+20 wide and anchored at the content box's left edge, so
+   rows and columns push 15-50px PAST the right viewport edge and clip
+   right-side controls (verified: 67 overflowing elements at 1440px and 74 at
+   1024px on /setting/editCompanySettings, the public login page at all
+   widths). Fix: pin the shipped gutter geometry, do not flip it. */
 html[dir="rtl"] .row,
-html[dir="rtl"] .row-fluid,
 html[dir="rtl"] .thumbnails {
+  margin-left: -20px !important;
+  margin-right: 0 !important;
+}
+
+html[dir="rtl"] .row-fluid {
   margin-left: 0 !important;
-  margin-right: -20px !important; /* default grid gutter */
+  margin-right: 0 !important; /* shipped .row-fluid has no gutter (width:100%) */
 }
 
 @media (min-width: 1200px) {
-  html[dir="rtl"] .row { margin-right: -30px !important; }
-  html[dir="rtl"] .thumbnails { margin-right: -30px !important; }
+  html[dir="rtl"] .row { margin-left: -30px !important; }
 }
 
 /* Tailwind utility margin-left→right */
