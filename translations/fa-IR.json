@@ -49,7 +49,7 @@
  },
  "language.firstDayOfWeek": {
   "en": "0",
-  "fa": "0",
+  "fa": "6",
   "tech": true
  },
  "language.isMeridian": {
@@ -90,58 +90,47 @@
  },
  "language.dayNames": {
   "en": "Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday",
-  "fa": "Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday",
-  "tech": true
+  "fa": "یکشنبه,دوشنبه,سه‌شنبه,چهارشنبه,پنجشنبه,جمعه,شنبه"
  },
  "language.dayNamesMin": {
   "en": "Su,Mo,Tu,We,Th,Fr,Sa",
-  "fa": "Su,Mo,Tu,We,Th,Fr,Sa",
-  "tech": true
+  "fa": "ی,د,س,چ,پ,ج,ش"
  },
  "language.dayNamesShort": {
   "en": "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
-  "fa": "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
-  "tech": true
+  "fa": "یکشنبه,دوشنبه,سه‌شنبه,چهارشنبه,پنجشنبه,جمعه,شنبه"
  },
  "language.monthNames": {
   "en": "January,February,March,April,May,June,July,August,September,October,November,December",
-  "fa": "January,February,March,April,May,June,July,August,September,October,November,December",
-  "tech": true
+  "fa": "ژانویه,فوریه,مارس,آوریل,مه,ژوئن,ژوئیه,اوت,سپتامبر,اکتبر,نوامبر,دسامبر"
  },
  "language.monthNamesShort": {
   "en": "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec",
-  "fa": "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec",
-  "tech": true
+  "fa": "ژانویه,فوریه,مارس,آوریل,مه,ژوئن,ژوئیه,اوت,سپتامبر,اکتبر,نوامبر,دسامبر"
  },
  "language.currentText": {
   "en": "Now",
-  "fa": "Now",
-  "tech": true
+  "fa": "اکنون"
  },
  "language.closeText": {
   "en": "Close",
-  "fa": "Close",
-  "tech": true
+  "fa": "بستن"
  },
  "language.buttonText": {
   "en": "Choose",
-  "fa": "Choose",
-  "tech": true
+  "fa": "انتخاب"
  },
  "language.nextText": {
   "en": "Next",
-  "fa": "Next",
-  "tech": true
+  "fa": "بعدی"
  },
  "language.prevText": {
   "en": "Prev",
-  "fa": "Prev",
-  "tech": true
+  "fa": "قبلی"
  },
  "language.weekHeader": {
   "en": "Wk",
-  "fa": "Wk",
-  "tech": true
+  "fa": "هفته"
  },
  "language.columnFormatMonth": {
   "en": "ddd",
