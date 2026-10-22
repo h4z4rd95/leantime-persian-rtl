@@ -76,7 +76,7 @@ def main(argv: list[str]) -> int:
         print(f"\nRESULT: FAIL ({len(all_problems)} problem(s))")
         return 1
     print("RESULT: PASS — RTL grid gutter keeps shipped single-sided geometry")
-    print("checked: " + ", ".join(str(f.relative_to(ROOT)) for f in files))
+    print("checked: " + ", ".join(str(f.relative_to(ROOT) if str(f).startswith(str(ROOT)) else f) for f in files))
     return 0
 
 
